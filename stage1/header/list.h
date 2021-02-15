@@ -5,8 +5,8 @@
  *      Author: varun
  */
 
-#ifndef LIST_H_
-#define LIST_H_
+#ifndef HEADER_LIST_H_
+#define HEADER_LIST_H_
 
 #include "common.h"
 
@@ -27,4 +27,4 @@ public:
 	void printListInReverse(listNode* h);
 };
 
-#endif /* LIST_H_ */
+#endif /* HEADER_LIST_H_ */

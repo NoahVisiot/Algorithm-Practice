@@ -5,8 +5,8 @@
  *      Author: varun
  */
 
-#ifndef COMMON_H_
-#define COMMON_H_
+#ifndef HEADER_COMMON_H_
+#define HEADER_COMMON_H_
 
 #define OFF 0
 #define ON 1
@@ -19,4 +19,4 @@ typedef enum status {
 	STATUS_NULL_PTR,
 }Status_t;
 
-#endif /* COMMON_H_ */
+#endif /* HEADER_COMMON_H_ */
