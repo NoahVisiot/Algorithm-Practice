@@ -1,6 +1,7 @@
 include ./inc.mk
 
-CFLAGS = -c
+CFLAG = -Wall
+CFLAGS += -c
 INCPATH = header/
 
 EXE=stage1
