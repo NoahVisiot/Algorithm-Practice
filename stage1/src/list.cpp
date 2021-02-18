@@ -12,50 +12,55 @@
 
 using namespace std;
 
-Status_t listNode::createList(int arr[],int n,listNode *h)
+singlyList* singlyList::getNext(void)
 {
-	Status_t status = STATUS_SUCCESS;
+	return next;
+}
 
-	if(h) {
-		/* 1. We're creating fist node */
-		if(!h->getNext()) {
-			data = arr[0];
-		} else {
-			/* 2. We're creating intermediate node*/
+void singlyList::setNext(singlyList *next)
+{
+	this->next = next;
+}
+
+void singlyList::printNode(void)
+{
+	cout<<data;
+}
+
+void singlyList::setData(int data)
+{
+	this->data = data;
+}
+
+void printReverseList(singlyList *obj)
+{
+	if(obj) {
+		if(obj->getNext())
+			printReverseList(obj->getNext());
+		obj->printNode();
+	}
+}
+
+singlyList *createList(int arr[],int N)
+{
+	singlyList *h=NULL;
+	singlyList *n=NULL;
+	singlyList *t=NULL;
+
+	if(N > 0) {
+		for(int i=0;i<N;i++) {
+			if(!h) {
+				h = new singlyList;
+				h->setData(arr[i]);
+				n = h;
+			} else {
+				t = new singlyList;
+				t->setData(arr[i]);
+				n->setNext(t);
+				n = t;
+			}
 		}
-	} else
-		status = STATUS_NULL_PTR;
+	}
 
-	return status;
+	return h;
 }
-
-listNode* listNode::getNext(void)
-{
-	if(next)
-		return next->next;
-	return NULL;
-}
-
-void listNode::printList()
-{
-	cout << "%d" <<data;
-}
-
-void listOps::printListInReverse(listNode* head) {
-    if(head == NULL)
-        return;
-
-    printListInReverse(head->getNext());
-    head->printList();
-}
-
-void listOps::deleteNode()
-{
-
-}
-
-void listOps::addNode()
-{
-
-}
-

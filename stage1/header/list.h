@@ -10,21 +10,22 @@
 
 #include "common.h"
 
-class listNode {
+class singlyList {
 private:
 	int data;
-	listNode *next;
+	singlyList *next;
 public:
-	void printList();
-	listNode* getNext(void); // return the next node.
-	Status_t createList(int arr[],int n,listNode *h);
+	void setData(int val);
+	void printNode(void);
+	singlyList* getNext(void); // return the next node.
+	void setNext(singlyList *nxt);
+	singlyList(void) {
+		data =0;
+		next=NULL;
+	}
 };
 
-class listOps {
-public:
-	void deleteNode();
-	void addNode();
-	void printListInReverse(listNode* h);
-};
+void printReverseList(singlyList *obj);
+singlyList *createList(int arr[],int N);
 
 #endif /* HEADER_LIST_H_ */

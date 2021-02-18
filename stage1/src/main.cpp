@@ -14,14 +14,13 @@ using namespace std;
 
 int main() {
 	Status_t status = STATUS_SUCCESS;
-	listNode lNode;
+	singlyList *h=NULL;
 	int arr[] = {1,2,3,4};
 
-	status = lNode.createList(arr,sizeof(arr)/sizeof(arr[0]),&lNode);
-	if(STATUS_SUCCESS == status) {
-		cout<<"List created\n";
-	} else {
-		cout<<"Error creating list\n";
+	h = createList(arr,sizeof(arr)/sizeof(arr[0]));
+	if(h) {
+		cout<<"list created\n";
+		printReverseList(h);
 	}
 
 	return 0;
