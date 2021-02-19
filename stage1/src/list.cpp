@@ -41,7 +41,7 @@ void printReverseList(singlyList *obj)
 	}
 }
 
-singlyList *createList(int arr[],int N)
+singlyList* createList(int arr[],int N)
 {
 	singlyList *h=NULL;
 	singlyList *n=NULL;

@@ -25,6 +25,10 @@ public:
 	}
 };
 
+class singlyListOps:public singlyList {
+
+};
+
 void printReverseList(singlyList *obj);
 singlyList *createList(int arr[],int N);
 
