@@ -1,35 +1,32 @@
 /*
  * list.h
  *
- *  Created on: Feb 13, 2021
- *      Author: varun
+ *  Created on: 08-Oct-2021
+ *      Author: Varun
  */
 
-#ifndef HEADER_LIST_H_
-#define HEADER_LIST_H_
+#ifndef LIST_H_
+#define LIST_H_
 
-#include "common.h"
+#include <iostream>
+#include <vector>
 
-class singlyList {
+using namespace std;
+
+class ImmutableListNode {
 private:
-	int data;
-	singlyList *next;
+	int val;
+	ImmutableListNode *next;
 public:
-	void setData(int val);
-	void printNode(void);
-	singlyList* getNext(void); // return the next node.
-	void setNext(singlyList *nxt);
-	singlyList(void) {
-		data =0;
-		next=NULL;
-	}
+	ImmutableListNode() {val=0;next=NULL;}
+	ImmutableListNode(int val) {this->val = val; next=NULL;}
+	void printValue(ImmutableListNode *node) {cout << node->val << endl;}
+	ImmutableListNode* getNext(ImmutableListNode *node) { return node?node->next:NULL;}
+	ImmutableListNode *createList(vector<int> &a);
+	void printListIter(ImmutableListNode *);
+	void printListRec(ImmutableListNode *);
+	ImmutableListNode* createXorList(vector<int> &arr);
 };
 
-class singlyListOps:public singlyList {
 
-};
-
-void printReverseList(singlyList *obj);
-singlyList *createList(int arr[],int N);
-
-#endif /* HEADER_LIST_H_ */
+#endif /* LIST_H_ */

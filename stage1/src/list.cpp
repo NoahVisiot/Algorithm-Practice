@@ -1,66 +1,89 @@
 /*
  * list.cpp
  *
- *  Created on: Feb 13, 2021
- *      Author: varun
+ *  Created on: 08-Oct-2021
+ *      Author: Varun
  */
 
-#include <iostream>
-
-#include "common.h"
 #include "list.h"
 
-using namespace std;
+void ImmutableListNode::printListRec(ImmutableListNode *node) {
+	if(!node)
+		return;
 
-singlyList* singlyList::getNext(void)
-{
-	return next;
+	printListRec(node->getNext(node));
+	node->printValue(node);
 }
 
-void singlyList::setNext(singlyList *next)
-{
-	this->next = next;
-}
+ImmutableListNode* ImmutableListNode::createList(vector<int> &arr) {
+	ImmutableListNode *root=NULL,*temp=NULL;
+	bool flag=false;
 
-void singlyList::printNode(void)
-{
-	cout<<data;
-}
-
-void singlyList::setData(int data)
-{
-	this->data = data;
-}
-
-void printReverseList(singlyList *obj)
-{
-	if(obj) {
-		if(obj->getNext())
-			printReverseList(obj->getNext());
-		obj->printNode();
-	}
-}
-
-singlyList* createList(int arr[],int N)
-{
-	singlyList *h=NULL;
-	singlyList *n=NULL;
-	singlyList *t=NULL;
-
-	if(N > 0) {
-		for(int i=0;i<N;i++) {
-			if(!h) {
-				h = new singlyList;
-				h->setData(arr[i]);
-				n = h;
-			} else {
-				t = new singlyList;
-				t->setData(arr[i]);
-				n->setNext(t);
-				n = t;
-			}
+	for(auto &a:arr) {
+		if(!flag) {
+			root=new ImmutableListNode(a);
+			temp = root;
+			flag = true;
+		} else {
+			temp->next = new ImmutableListNode(a);
+			temp = temp->next;
 		}
 	}
 
-	return h;
+	return root;
 }
+
+ImmutableListNode* Xor(ImmutableListNode* a, ImmutableListNode* b) {
+	return reinterpret_cast<ImmutableListNode*>(
+			reinterpret_cast<uintptr_t>(a)
+			^reinterpret_cast<uintptr_t>(b)
+			);
+}
+
+ImmutableListNode* ImmutableListNode::createXorList(vector<int> &arr) {
+	ImmutableListNode *root=NULL,*curr=NULL;
+	bool flag=false;
+	ImmutableListNode *next=NULL,*tail=NULL;
+
+	for(auto &a:arr) {
+		if(!flag) {
+			root=new ImmutableListNode(a);
+			curr = root;
+			flag = true;
+		} else {
+			next = new ImmutableListNode(a);
+			curr->next = Xor(tail,next);
+			tail = curr;
+			curr = next;
+			next = next->next;
+			curr->next = Xor(tail,next);
+		}
+	}
+
+	return root;
+}
+
+void ImmutableListNode::printListIter(ImmutableListNode *root) {
+	ImmutableListNode *tail=NULL,*next=NULL;
+	ImmutableListNode *curr=NULL;
+
+	if(!root)
+		return;
+
+	curr=root;
+	do {
+		next = Xor(tail,curr->next);
+		tail = curr;
+		curr = next;
+	}while(next);
+
+	curr=tail;
+	tail=NULL;
+	do {
+		printValue(curr);
+		next = Xor(tail,curr->next);
+		tail = curr;
+		curr = next;
+	}while(next!=NULL);
+}
+
